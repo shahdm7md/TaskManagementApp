@@ -1,0 +1,75 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="login-box">
+            <form id="account" method="post">
+                <h1>@ViewData["Title"]</h1>
+                <h2>Use a local account to log in.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" style="border-radius: 25px;" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" style="border-radius: 25px;" />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="border-radius: 25px;">Log in</button>
+                </div>
+                <div>
+                    <p style="color: rgba(35, 41, 70, 0.7);">
+                        <!-- لون النص شفاف -->
+                        <a id="forgot-password" asp-page="./ForgotPassword" style="color: inherit;">Forgot your password?</a>
+                    </p>
+                    <p style="color: rgba(35, 41, 70, 0.7);">
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" style="color: inherit;">Register as a new user</a>
+                    </p>
+                    <p style="color: rgba(35, 41, 70, 0.7);">
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" style="color: inherit;">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .login-box {
+        background-color: rgba(255, 255, 255, 0.8); /* خلفية بيضاء شفافة */
+        padding: 20px;
+        border-radius: 15px; /* زوايا مستديرة */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* ظل للصندوق */
+        color: #232946; /* لون النص */
+    }
+
+    .btn-primary {
+        background-color: #eebbc3; /* لون الزر */
+        border: none; /* إزالة الحدود */
+    }
+
+        .btn-primary:focus,
+        .btn-primary:active {
+            background-color: #eebbc3; /* الحفاظ على نفس اللون عند الضغط */
+            box-shadow: none; /* إزالة الظل */
+        }
+</style>

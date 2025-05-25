@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Taskify</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TaskManagementApp.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Salsa&display=swap" rel="stylesheet">
+    <link rel="icon" href="~/images/favicon.svg" type="image/svg+xml" />
+
+
+
+    <style>
+        .navbar-nav .nav-link:hover {
+            color: #b8c1ec !important; 
+        }
+
+        body {
+            background-image: url('/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat; 
+        }
+        
+        .navbar-light {
+            background-color: rgba(35, 41, 70, 0.8) !important; 
+            padding: 10px 20px; /* زيادة المساحة داخل الناف بار */
+        }
+
+            .navbar-light .navbar-brand {
+                color: #eebbc3 !important; /* تغيير لون اسم الموقع */
+                font-size: 3em; /* تغيير حجم الخط ليكون أكبر */
+            }
+
+            .navbar-light .navbar-nav .nav-link {
+                color: #fff !important;
+                font-size: 1.2em; /* زيادة حجم خط الروابط */
+                margin-left: 10px; /* إضافة مسافة بين العناصر */
+            }
+    </style>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/favicon.png" alt="Taskify" style="height: 50px; width: 50px; margin-right: 3px; transform: translateY(-15px);" />
+                    Taskify
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.Identity.IsAuthenticated)
+                        { // تحقق إذا كان المستخدم مسجلاً الدخول
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="Index">My Tasks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Task" asp-action="AddTask">Add Task</a>
+                            </li>
+                        }
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+ 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

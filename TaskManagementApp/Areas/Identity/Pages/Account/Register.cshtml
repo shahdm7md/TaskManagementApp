@@ -1,0 +1,93 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="registration-box">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h1>@ViewData["Title"]</h1>
+                <h2>Create a new account.</h2>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" style="border-radius: 25px;" />
+                    <label asp-for="Input.Email">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" id="Input_Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" style="border-radius: 25px;" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div id="passwordErrors" class="text-danger" style="display:none;"></div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" style="border-radius: 25px;" />
+                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="border-radius: 25px;">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Input_Password').on('input', function () {
+                var password = $(this).val();
+                var errors = [];
+
+                if (!/[A-Z]/.test(password)) {
+                    errors.push("The password must contain at least one uppercase letter.");
+                }
+                if (!/[a-z]/.test(password)) {
+                    errors.push("The password must contain at least one lowercase letter.");
+                }
+
+                if (!/[^a-zA-Z0-9]/.test(password)) {
+                    errors.push("Passwords must have at least one non-alphanumeric character.");
+                }
+
+                if (!/\d/.test(password)) {
+                    errors.push("Passwords must have at least one digit ('0'-'9').");
+                }
+
+                if (errors.length > 0) {
+                    $('#passwordErrors').html(errors.join('<br>')).show();
+                } else {
+                    $('#passwordErrors').hide();
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .registration-box {
+        background-color: rgba(255, 255, 255, 0.8); /* خلفية بيضاء شفافة */
+        padding: 20px;
+        border-radius: 15px; /* زوايا مستديرة */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* ظل للصندوق */
+        color: #232946; /* لون النص */
+    }
+
+    .btn-primary {
+        background-color: #eebbc3; /* لون الزر */
+        border: none; /* إزالة الحدود */
+    }
+
+    /* جعل الزر ذو حواف بيضاوية */
+    .btn-primary {
+        border-radius: 25px; /* حواف بيضاوية */
+    }
+</style>

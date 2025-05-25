@@ -1,0 +1,61 @@
+﻿@model TaskManagementApp.Models.UserTask
+
+@{
+    ViewData["Title"] = "AddTask";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card" style="background-color: rgba(255, 255, 255, 0.5); padding: 30px; border-radius: 15px;">
+            <form asp-action="AddTask">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group mb-4">
+                    <!-- زيادة المسافة السفلية إلى mb-5 -->
+                    <label asp-for="Title" class="control-label" style="color: #232946; font-weight: bold;"></label> <!-- جعل الخط بولد -->
+                    <input asp-for="Title" class="form-control" style="border-radius: 15px;" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- زيادة المسافة السفلية إلى mb-5 -->
+                    <label asp-for="Description" class="control-label" style="color: #232946; font-weight: bold;"></label> <!-- جعل الخط بولد -->
+                    <input asp-for="Description" class="form-control" style="border-radius: 15px;" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- زيادة المسافة السفلية إلى mb-5 -->
+                    <label asp-for="DueDate" class="control-label" style="color: #232946; font-weight: bold;"></label> <!-- جعل الخط بولد -->
+                    <input asp-for="DueDate" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" style="border-radius: 15px;" />
+                    <span asp-validation-for="DueDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- زيادة المسافة السفلية إلى mb-5 -->
+                    <label asp-for="Priority" class="control-label" style="color: #232946; font-weight: bold;"></label> <!-- جعل الخط بولد -->
+                    <input asp-for="Priority" class="form-control" style="border-radius: 15px;" />
+                    <span asp-validation-for="Priority" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4">
+                    <!-- زيادة المسافة العلوية إلى mt-5 -->
+                    <input type="submit" value="Create" class="btn" style="background-color: #eebbc3; color: #fff; border-radius: 15px; " />
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-4">
+            <!-- زيادة المسافة العلوية لفقرة Back to List -->
+            <a asp-action="Index" style="color: rgba(35, 41, 70, 0.7); font-weight: bold;">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
